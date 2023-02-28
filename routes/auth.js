@@ -32,17 +32,17 @@ router.post('/signin', async function (req, res, next) {
     }
 });
 
-router.get('/signup', async function (req, res, next) {
-    var salt = await bcrypt.genSalt(10);
-    var user = {
-        first_name: 'Kostiantyn',
-        last_name: 'Liakhov',
-        email: 'kostiantyn.liakhov@gmail.com',
-        password: await bcrypt.hash('Test1234!', salt)
-    };
-    created_user = await User.create(user);
-    res.status(201).json(created_user);
-});
+// router.get('/signup', async function (req, res, next) {
+//     var salt = await bcrypt.genSalt(10);
+//     var user = {
+//         first_name: 'Kostiantyn',
+//         last_name: 'Liakhov',
+//         email: 'kostiantyn.liakhov@gmail.com',
+//         password: await bcrypt.hash('Test1234!', salt)
+//     };
+//     created_user = await User.create(user);
+//     res.status(201).json(created_user);
+// });
 
 
 module.exports = router;

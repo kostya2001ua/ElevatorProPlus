@@ -18,6 +18,10 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.INTEGER
             },
+            allocation: {
+                allowNull: false,
+                type: Sequelize.DOUBLE
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
