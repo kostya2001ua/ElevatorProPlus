@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start-server": "node ./bin/server",
-        "watch-server": "nodemon ./bin/server",
-        "start-desktop": "electron ./bin/desktop"
+        "start-server": "node ./src/bin/server",
+        "watch-server": "nodemon ./src/bin/server",
+        "start-desktop": "electron ./src/bin/desktop"
     },
     "dependencies": {
         "@popperjs/core": "^2.11.6",

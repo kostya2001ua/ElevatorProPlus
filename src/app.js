@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
-
 var app = express();
 
 // view engine setup
@@ -26,12 +23,13 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
+
+var routes = require('./routes');
+routes(app);
 
 
 // catch 404 and forward to error handler

@@ -4,10 +4,9 @@ var router = express.Router();
 var models = require('../models');
 var checkAuth = require('../middleware/checkAuth');
 
-var authRoutes = require('./auth');
 
 /* GET home page. */
-router.get('/', async function (req, res, next) {
+router.get('/', checkAuth, async function (req, res, next) {
     try {
          
         var inventory = await models.Inventory.create({
