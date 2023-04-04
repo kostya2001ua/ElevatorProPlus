@@ -1,0 +1,19 @@
+<% layout('../layouts/main') %>
+
+    <h3>Create new inventory record for Inventory <b><%= inventory.name %></b></h3>
+    <h5>Allocation: <%= inventory.allocationString %></h5> 
+    <form method="POST">
+        <div class="form-group mb-2">
+            <label>Product</label>
+            <select name="productId" class="form-select" required>
+                <% for( let i = 0; i < products.length; i++ ) { %>
+                    <option <%= typeof(productId) !== 'undefined' && productId == products[i].id ? 'selected' : '' %> value="<%= products[i].id %>"><%= products[i].name %></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="form-group mb-2">
+            <label>Allocation</label>
+            <input type="number" class="form-control" name="allocation" min="0.1" value="<%= typeof(allocation) !== 'undefined' ? allocation : 0 %>" step="0.1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

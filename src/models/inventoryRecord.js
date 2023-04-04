@@ -14,7 +14,22 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     InventoryRecord.init({
-        allocation: DataTypes.DOUBLE
+        allocation: DataTypes.DOUBLE,
+        createdAt: {
+            type: DataTypes.DATE,
+            get() {
+                return new Date(this.getDataValue('createdAt')).toLocaleString('uk-UA');
+            }
+        },
+        expiresAt: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                var createdAt = new Date(this.getDataValue('createdAt'));
+                var expiresAt = createdAt;
+                expiresAt.setDate(expiresAt.getDate() + this.Product.expirationPeriod)
+                return expiresAt.toLocaleString('uk-UA');
+            }
+        }
     }, {
         sequelize,
         modelName: 'InventoryRecord',

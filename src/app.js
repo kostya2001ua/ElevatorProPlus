@@ -27,10 +27,7 @@ app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/d
 app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
-
-var routes = require('./routes');
-routes(app);
-
+require('./routes')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

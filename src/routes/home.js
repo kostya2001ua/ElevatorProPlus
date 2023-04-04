@@ -29,7 +29,7 @@ router.get('/', checkAuth, async function (req, res, next) {
     } catch(e) {
         console.log(e.message)
     }
-    res.send('test')
+    res.render('home');
 });
 
 module.exports = router;

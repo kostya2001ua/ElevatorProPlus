@@ -1,0 +1,27 @@
+<% layout('../layouts/main') %>
+
+<h3>Inventories <a href="/inventories/create" class="btn btn-primary">Create New</a></h3>
+
+<table id="inventories-table" class="data-table table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < inventories.length; i++ ) { %>
+            <tr data-href="/inventories/<%= inventories[i].id %>">
+                <td><%= inventories[i].id %></td>
+                <td><%= inventories[i].name %></td>
+                <td><%= inventories[i].capacity %></td>
+                <td><%= inventories[i].createdAt %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+
+    

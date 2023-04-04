@@ -1,0 +1,26 @@
+<% layout('../layouts/main') %>
+
+<h3>Inventory Records of <b><%= inventory.name %></b> <a href="/inventory-records/create?inventoryId=<%= inventory.id %>" class="btn btn-primary">Create</a> </h3>
+<h5>Allocation: <%= inventory.allocationString %></h5> 
+
+<table id="inventory-records-table" class="data-table table table-hover">
+    <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Allocation</th>
+            <th>Expires At</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < inventoryRecords.length; i++ ) { %>
+            <tr>
+                <td><a href="/products/<%= inventoryRecords[i].Product.id %>"><%= inventoryRecords[i].Product.name %></a>  </td>
+                <td><%= inventoryRecords[i].allocation %></td>
+                <td><%= inventoryRecords[i].expiresAt %></td>
+                <td><%= inventoryRecords[i].createdAt %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+    

@@ -14,7 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
         price: DataTypes.DOUBLE,
-        expirationPeriod: DataTypes.INTEGER
+        expirationPeriod: DataTypes.INTEGER,
+        createdAt: {
+            type: DataTypes.DATE,
+            get() {
+                return new Date(this.getDataValue('createdAt')).toLocaleString('uk-UA');
+            }
+        }
     }, {
         sequelize,
         modelName: 'Product',

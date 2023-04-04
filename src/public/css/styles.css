@@ -1,0 +1,3 @@
+#inventories-table tbody tr[data-href] :hover {
+    cursor: pointer;
+}
