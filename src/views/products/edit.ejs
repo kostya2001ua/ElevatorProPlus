@@ -1,6 +1,8 @@
 <% layout('../layouts/main') %>
 
     <h3>Edit product <%= product.name %></h3>
+    <a href="inventory-records/<%= product.id %>">View inventory records</a>
+
     <form method="POST" method="POST">
         <div class="form-group mb-2">
             <label>Name</label>

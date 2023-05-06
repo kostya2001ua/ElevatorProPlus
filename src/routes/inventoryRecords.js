@@ -16,4 +16,6 @@ router.post('/create', inventoryRecordsController.createInventoryRecord);
 
 router.post('/move', inventoryRecordsController.moveInventoryRecord);
 
+router.post('/delete', inventoryRecordsController.deleteInventoryRecord);
+
 module.exports = router;

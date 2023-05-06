@@ -1,7 +1,10 @@
 <% layout('../layouts/main') %>
 
 <h3>Inventory Records of <b><%= inventory.name %></b> <a href="/inventory-records/create?inventoryId=<%= inventory.id %>" class="btn btn-primary">Create</a> </h3>
-<h5>Allocation: <%= inventory.allocationString %></h5> 
+<h5 class="js--inventory-allocation">Allocation: <%= inventory.allocationString %></h5> 
+<div class="alert alert-success d-none" role="alert" id="js-inv-record-deleted-alert">
+    <span>Inventory record successfully deleted</span>
+</div>
 
 <table id="inventory-records-table" class="data-table table table-hover">
     <thead>
@@ -20,7 +23,10 @@
                 <td><%= inventoryRecords[i].allocation %> kg</td>
                 <td><%= inventoryRecords[i].expiresAt %></td>
                 <td><%= inventoryRecords[i].createdAt %></td>
-                <td><a class="btn btn-light" href="/inventory-records/move?inventoryRecordId=<%= inventoryRecords[i].id %>">move</a>
+                <td>
+                    <a class="btn btn-dark" href="/inventory-records/move?inventoryRecordId=<%= inventoryRecords[i].id %>">move</a>
+                    <button class="btn btn-danger js--delete-inv-record" data-url="/inventory-records/delete?inventoryRecordId=<%= inventoryRecords[i].id %>">delete</button>
+                </td>
             </tr>
         <% } %>
     </tbody>

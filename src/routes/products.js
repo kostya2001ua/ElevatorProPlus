@@ -21,4 +21,6 @@ router.post('/:id', productsController.editProduct);
 
 router.get('/delete/:id', productsController.deleteProduct);
 
+router.get('/inventory-records/:id', productsController.showProductInventoryRecords);
+
 module.exports = router;

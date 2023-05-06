@@ -64,11 +64,23 @@ async function deleteProduct(req, res, next) {
     res.redirect('/product?successMessage=' + successMessage);
 }
 
+async function showProductInventoryRecords(req, res, next) {
+    var product = await Product.findByPk(req.params.id, {
+        include: [
+            { model: models.InventoryRecord, include: [models.Inventory, models.Product] },
+        ]
+    });
+    res.render('products/inventoryRecords', {
+        product: product
+    })
+}   
+
 module.exports = {
     showProductsPage: showProductsPage,
     showCreateProductPage: showCreateProductPage,
     createProduct: createProduct,
     showProductPage: showProductPage,
     editProduct: editProduct,
-    deleteProduct: deleteProduct
+    deleteProduct: deleteProduct,
+    showProductInventoryRecords: showProductInventoryRecords
 }

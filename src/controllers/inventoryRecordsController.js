@@ -108,10 +108,28 @@ async function moveInventoryRecord(req, res, next) {
 
 }
 
+async function deleteInventoryRecord(req, res, next) {
+    var inventoryRecord = await InventoryRecord.findByPk(req.query.inventoryRecordId, {
+        include: {
+            model:models.Inventory,
+            include: models.InventoryRecord
+        }
+    });
+    if(!inventoryRecord) {
+        return next();
+    }
+    await inventoryRecord.destroy();
+    return res.json({
+        success: true,
+        newAllocationString: inventoryRecord.Inventory.allocationString
+    });
+}
+
 module.exports = {
     showInventoryRecordsListPage: showInventoryRecordsListPage,
     showCreateInventoryRecordsPage: showCreateInventoryRecordsPage,
     createInventoryRecord: createInventoryRecord,
     showMoveInventoryRecordPage: showMoveInventoryRecordPage,
-    moveInventoryRecord: moveInventoryRecord
+    moveInventoryRecord: moveInventoryRecord,
+    deleteInventoryRecord: deleteInventoryRecord
 }
