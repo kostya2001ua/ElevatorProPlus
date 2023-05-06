@@ -6,70 +6,19 @@ var checkAuth = require('../middleware/checkAuth');
 
 router.use(checkAuth);
 
-var Product = models.Product;
 
-router.get('/', async function (req, res, next) {
-    var products = await Product.findAll()
-    var response = { products: products };
-    res.render('products/index', response);
-});
+var productsController = require('../controllers/productsController');
 
-router.get('/create', async function (req, res, next) {
-    res.render('products/create');
-});
+router.get('/', productsController.showProductsPage);
 
-router.post('/create', async function (req, res, next) {
-    var name = req.body.name;
-    var expirationPeriod = req.body.expirationPeriod;
-    var description = req.body.description;
-    var price = req.body.price;
-    var product = await Product.create({
-        name: name,
-        description: description,
-        price: price,
-        expirationPeriod: expirationPeriod
-    });
-    res.redirect('/products/' + product.id);
+router.get('/create', productsController.showCreateProductPage);
 
-});
+router.post('/create', productsController.createProduct);
 
-router.get('/:id', async function (req, res, next) {
-    var product = await Product.findByPk(req.params.id);
-    if (!product) {
-        res.send('404 not found');
-    }
-    res.render('products/edit', {
-        product: product
-    });
-});
+router.get('/:id', productsController.showProductPage);
 
-router.post('/:id', async function (req, res, next) {
-    var product = await Product.findByPk(req.params.id);
-    if (!product) {
-        res.send('404 not found');
-    }
-    product.set({
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        expirationPeriod: req.body.expirationPeriod
-    });
-    await product.save();
-    res.render('products/edit', {
-        product: product,
-        successMessage: 'Product updated successfuly'
-    });
-});
+router.post('/:id', productsController.editProduct);
 
-router.get('/delete/:id', async function (req, res, next) {
-    var product = await Product.findByPk(req.params.id);
-    if (!product) {
-        res.send('404 not found');
-    }
-    await product.destroy();
-    var successMessage = encodeURIComponent('product successfully deleted');
-    res.redirect('/product?successMessage=' + successMessage);
-});
-
+router.get('/delete/:id', productsController.deleteProduct);
 
 module.exports = router;
