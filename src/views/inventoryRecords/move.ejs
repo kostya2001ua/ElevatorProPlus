@@ -1,0 +1,24 @@
+<% layout('../layouts/main') %>
+
+<h3>Move Inventory Record</h3>
+
+<p>Product: <a href="/products/<%= inventoryRecord.Product.id %>"><%= inventoryRecord.Product.name %></a></p>
+<p>Allocation: <%= inventoryRecord.allocation %></p>
+<p>Current Inventory: <a href="/inventories/<%= inventoryRecord.Inventory.id %>"><%= inventoryRecord.Inventory.name %> <%= inventoryRecord.Inventory.allocationString %></a></p>
+
+<h4>Move To:</h4>
+<form method="post">
+    <select name="moveToInventoryId" id="moveToInventoryId" class="form-select" required>
+        <% for( let i = 0; i < inventories.length; i++ ) { %>
+            <% if (inventories[i].id !== inventoryRecord.Inventory.id) { %>
+                <% if (inventories[i].canFit(inventoryRecord.allocation)) { %>
+                    <option value="<%= inventories[i].id %>"><%= inventories[i].name %> <%= inventories[i].allocationString %></option>
+                <% } else { %>
+                    <option disabled value="<%= inventories[i].id %>">Can't fit <%= inventories[i].name %> <%= inventories[i].allocationString %></option>
+                <% } %>
+            <% } %>
+        <% } %>
+    </select>
+    <input type="hidden" name="inventoryRecordId" value="<%= inventoryRecord.id %>">
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+</form>

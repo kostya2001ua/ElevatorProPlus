@@ -1,0 +1,9 @@
+<% layout('../layouts/main') %>
+
+<div class="alert alert-success mt-4">
+    Inventory record Moved successfully
+</div>
+
+<p>Product: <a href="/products/<%= inventoryRecord.Product.id %>"><%= inventoryRecord.Product.name %></a></p>
+<p>Allocation: <%= inventoryRecord.allocation %></p>
+<p>New Inventory: <a href="/inventories/<%= inventory.id %>"><%= inventory.name %> <%= inventory.allocationString %></a></p>

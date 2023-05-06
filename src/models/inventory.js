@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'inventoryId'
             });
         }
+        canFit(allocation) {
+            return this.totalAllocation + allocation <= this.capacity;
+        }
     }
     Inventory.init({
         name: DataTypes.STRING,
