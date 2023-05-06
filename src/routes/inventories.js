@@ -9,7 +9,9 @@ router.use(checkAuth);
 var Inventory = models.Inventory;
 
 router.get('/', async function (req, res, next) {
-    var inventories = await Inventory.findAll();
+    var inventories = await Inventory.findAll({
+        include: models.InventoryRecord
+    });
     var response = {
         inventories: inventories
     };
