@@ -3,7 +3,7 @@
     <h3>Edit product <%= product.name %></h3>
     <a href="inventory-records/<%= product.id %>">View inventory records</a>
 
-    <form method="POST" method="POST">
+    <form method="POST" action="/products/<%= product.id %>" class="ajax-form">
         <div class="form-group mb-2">
             <label>Name</label>
             <input name="name" value="<%= product.name %>" type="text" required class="form-control" placeholder="Enter name of product">
@@ -13,11 +13,11 @@
             <textarea name="description" value="<%= product.description %>" class="form-control" cols="30" rows="10" placeholder="Enter description of product"></textarea>
         </div>
         <div class="form-group mb-2">
-            <label>Expiration Period</label>
+            <label>Expiration Period(days)</label>
             <input type="number" class="form-control" name="expirationPeriod" min="0" value="<%= product.expirationPeriod %>" step="1">
         </div>
         <div class="form-group mb-2">
-            <label>Price</label>
+            <label>Price(UAH)</label>
             <input type="number" class="form-control" required name="price" min="0" value="<%= product.price %>" step="0.1">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

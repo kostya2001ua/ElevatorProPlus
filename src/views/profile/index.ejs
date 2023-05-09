@@ -1,0 +1,9 @@
+<% layout('../layouts/main') %>
+
+<h3>Profile info</h3>
+
+<p>Username: <b><%= user.username %></b></p>
+<p>First Name: <b><%= user.first_name %></b></p>
+<p>LastName: <b><%= user.last_name %></b></p>
+
+<%-partial('../users/changePasswordForm') %>

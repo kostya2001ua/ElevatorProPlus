@@ -12,9 +12,11 @@ router.get('/signin', async function (req, res, next) {
 
 router.post('/signin', async function (req, res, next) {
     try {
-        var email = req.body.email;
+        req.session.user = null;
+
+        var username = req.body.username;
         var password = req.body.password;
-        var user = await User.findOne({ where: { email: email } });
+        var user = await User.findOne({ where: { username: username } });
 
         if (!user) {
             throw new Error('User does not exist');
@@ -32,17 +34,9 @@ router.post('/signin', async function (req, res, next) {
     }
 });
 
-// router.get('/signup', async function (req, res, next) {
-//     var salt = await bcrypt.genSalt(10);
-//     var user = {
-//         first_name: 'Kostiantyn',
-//         last_name: 'Liakhov',
-//         email: 'kostiantyn.liakhov@gmail.com',
-//         password: await bcrypt.hash('Test1234!', salt)
-//     };
-//     created_user = await User.create(user);
-//     res.status(201).json(created_user);
-// });
-
+router.get('/logout', async function(req, res, next) {
+    req.session.user = null;
+    res.redirect('/auth/signin');
+});
 
 module.exports = router;

@@ -37,21 +37,29 @@ async function showProductPage(req, res, next) {
 }
 
 async function editProduct(req, res, next) {
-    var product = await Product.findByPk(req.params.id);
-    if (!product) {
-        res.send('404 not found');
+    try {
+        var product = await Product.findByPk(req.params.id);
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        product.set({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            expirationPeriod: req.body.expirationPeriod
+        });
+        await product.save();
+        res.json({
+            success: true,
+            message: 'Product updated successfuly'
+        });
+
+    } catch(err) {
+        res.json({
+            success: false,
+            message: err.message
+        });
     }
-    product.set({
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        expirationPeriod: req.body.expirationPeriod
-    });
-    await product.save();
-    res.render('products/edit', {
-        product: product,
-        successMessage: 'Product updated successfuly'
-    });
 }
 
 async function deleteProduct(req, res, next) {

@@ -15,11 +15,16 @@ module.exports = {
             last_name: {
                 type: Sequelize.STRING
             },
-            email: {
+            username: {
                 type: Sequelize.STRING
             },
             password: {
                 type: Sequelize.STRING
+            },
+            can_create_users: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+                allowNull: false
             },
             createdAt: {
                 allowNull: false,

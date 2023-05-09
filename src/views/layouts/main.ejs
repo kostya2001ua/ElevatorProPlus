@@ -6,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/main.js"></script>
+
+    <%-partial('../partials/js-includes') %>
+
+
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/success-modal.css">
+
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
 </head>
 <body>
     <div class="container">
         <div class="m-1">
             <%-partial('../partials/header') %>
         </div>
+        <%-partial('../partials/alerts') %>
+
         <% if (typeof(successMessage) !== 'undefined') { %>
             <div class="alert alert-success" role="alert">
                 <%= successMessage %>
@@ -32,6 +36,7 @@
         <% } %>
         
         <%- body %> 
+
     </div>
 </body>
 </html>

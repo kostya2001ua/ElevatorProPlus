@@ -30,5 +30,21 @@ $(document).ready(function () {
             }
         })
     });
-    
+
+    $(document).on('submit', '.ajax-form', function(e) {
+        e.preventDefault();
+        var $form = $(this);
+        $.ajax({
+            method: $form.attr('method'),
+            url: $form.attr('action'),
+            data: $form.serialize(),
+            success: function(response) {
+                if(response.success) {
+                    showSuccessAlert(response.message);             
+                } else {
+                    showErrorAlert(response.message);
+                }
+            }
+        });
+    });
 });

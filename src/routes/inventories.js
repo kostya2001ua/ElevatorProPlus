@@ -9,7 +9,7 @@ var inventoryController = require('../controllers/inventoryController');
 
 router.get('/', inventoryController.showInventoriesListPage);
 
-router.get('/create', inventoryController.showInventoriesListPage);
+router.get('/create', inventoryController.showCreateInventoryPage);
 
 router.post('/create', inventoryController.createInventory);
 

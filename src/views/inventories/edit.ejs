@@ -3,7 +3,7 @@
     <h3>Inventory <%= inventory.name %></h3>
     <a href="/inventory-records?inventoryId=<%= inventory.id %>">View inventory records</a>
 
-    <form method="POST" method="POST" class="g-4">
+    <form method="POST" action="/inventories/<%= inventory.id %>" class="g-4 ajax-form">
         <div class="form-group mb-2">
             <label>Name</label>
             <input name="name" type="text" required class="form-control" value="<%= inventory.name %>" placeholder="Enter name of inventory">

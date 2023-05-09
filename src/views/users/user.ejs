@@ -1,0 +1,28 @@
+<% layout('../layouts/main') %>
+
+<h3>User <b><%= user.username %></b></h3>
+
+<form method="POST" action="/users/<%= user.id %>" class="ajax-form">
+    <div class="form-group mb-2">
+        <label>User Name</label>
+        <input type="text" required class="form-control" name="username" value="<%= user.username %>">
+    </div>
+    <div class="form-group mb-2">
+        <label>First Name</label>
+        <input name="first_name" value="<%= user.first_name %>" type="text" required class="form-control" placeholder="Enter first name">
+    </div>
+    <div class="form-group mb-2">
+        <label>Last Name</label>
+        <input name="last_name" value="<%= user.last_name %>" type="text" required class="form-control" placeholder="Enter last name">
+    </div>
+
+    <div class="form-group mb-2">
+        <input name="can_create_users" type="checkbox" class="form-check-input" <%= user.can_create_users ? 'checked': '' %>>
+        <label class="form-check-label">Can manage users</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<h3 class="mt-5">Change Password</h3>
+<%-partial('./changePasswordForm') %>

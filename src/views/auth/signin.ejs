@@ -1,16 +1,18 @@
 <% layout('../layouts/auth') %>
 
     <% if (typeof(error) !== 'undefined') { %>
-        <%= error %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
     <% } %>
-    <form method="POST">
+    <form method="POST" action="/auth/signin">
         <div class="form-group">
-            <label>Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Enter your email">
+            <label>Username</label>
+            <input required name="username" type="text" class="form-control" placeholder="Enter your username">
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input name="password" type="password" class="form-control" placeholder="Password">
+            <input required name="password" type="password" class="form-control" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

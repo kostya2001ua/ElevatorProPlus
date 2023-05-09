@@ -23,6 +23,11 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
+
 app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));

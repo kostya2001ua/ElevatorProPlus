@@ -1,0 +1,27 @@
+<% layout('../layouts/main') %>
+
+<h3>Users</h3>
+
+<table id="users-table" class="data-table table table-hover">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Can manage users</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < users.length; i++ ) { %>
+            <tr data-href="/users/<%= users[i].id %>">
+                <td><%= users[i].username %></td>
+                <td><%= users[i].first_name %></td>
+                <td><%= users[i].last_name %></td>
+                <td><%= users[i].can_create_users ? 'Yes' : 'No' %></td>
+
+                <td></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
