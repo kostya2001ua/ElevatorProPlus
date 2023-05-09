@@ -5,6 +5,7 @@ var productsRoutes = require('./products');
 var inventoryRecordsRoutes = require('./inventoryRecords');
 var usersRoutes = require('./users');
 var profileRoutes = require('./profile');
+var clientsRoutes = require('./clients');
 
 
 //set up routes
@@ -16,4 +17,6 @@ module.exports = function(app) {
     app.use('/inventories', inventoriesRoutes);
     app.use('/products', productsRoutes);
     app.use('/inventory-records', inventoryRecordsRoutes);
+    app.use('/clients', clientsRoutes);
+
 }

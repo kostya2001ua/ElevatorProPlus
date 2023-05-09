@@ -1,0 +1,18 @@
+<% layout('../layouts/main') %>
+
+<h3>Clients</h3>
+
+<table id="clients-table" class="data-table table table-hover">
+    <thead>
+        <tr>
+            <th>Company name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < clients.length; i++ ) { %>
+            <tr data-href="/clients/<%= clients[i].id %>">
+                <td><%= clients[i].company_name %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

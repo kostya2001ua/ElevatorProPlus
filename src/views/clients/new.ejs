@@ -1,0 +1,18 @@
+<% layout('../layouts/main') %>
+
+<h3>Add new Client</h3>
+<form method="POST" action="/clients/new">
+    <div class="form-group mb-2">
+        <label>Company Name</label>
+         <input name="company_name" type="text" required class="form-control" placeholder="Enter company name">
+    </div>
+    <div class="form-group mb-2">
+        <label>Company Name</label>
+        <textarea name="contacts" class="form-control" cols="30" rows="10" placeholder="Enter contacts of company"></textarea>
+    </div>
+    <div class="form-group mb-2">
+        <label>Address</label>
+         <input name="address" type="text" required class="form-control" placeholder="Enter company address">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

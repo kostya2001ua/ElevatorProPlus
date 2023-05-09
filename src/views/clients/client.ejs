@@ -1,0 +1,20 @@
+<% layout('../layouts/main') %>
+
+<h3>Company <b><%= client.company_name %></b></h3>
+
+<form method="POST" action="/clients/edit" class="ajax-form">
+    <input type="hidden" name="id" value="<%= client.id %>">
+    <div class="form-group mb-2">
+        <label>Company Name</label>
+        <input name="company_name" type="text" required class="form-control" placeholder="Enter company name" value="<%= client.company_name %>">
+    </div>
+    <div class="form-group mb-2">
+        <label>Contacts</label>
+        <textarea name="contacts" class="form-control" cols="30" rows="10" placeholder="Enter contacts of company"><%= client.contacts %></textarea>
+    </div>
+    <div class="form-group mb-2">
+        <label>Address</label>
+        <input name="address" type="text" required class="form-control" placeholder="Enter company address" value="<%= client.address %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

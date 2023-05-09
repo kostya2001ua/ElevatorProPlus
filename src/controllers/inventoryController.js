@@ -74,7 +74,9 @@ async function editInventory(req, res, next) {
 }
 
 async function deleteInventory(req, res, next) {
-    var inventory = await Inventory.findByPk(req.params.id);
+    var inventory = await Inventory.findByPk(req.params.id, {
+        include: models.InventoryRecord
+    });
     if (!inventory) {
         return next()
     }
