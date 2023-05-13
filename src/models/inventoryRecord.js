@@ -29,6 +29,15 @@ module.exports = (sequelize, DataTypes) => {
                 expiresAt.setDate(expiresAt.getDate() + this.Product.expirationPeriod)
                 return expiresAt.toLocaleString('uk-UA');
             }
+        },
+        expiresAtDate: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                var createdAt = new Date(this.getDataValue('createdAt'));
+                var expiresAt = createdAt;
+                expiresAt.setDate(expiresAt.getDate() + this.Product.expirationPeriod)
+                return expiresAt;
+            }
         }
     }, {
         sequelize,

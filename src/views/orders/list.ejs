@@ -1,0 +1,28 @@
+<% layout('../layouts/main') %>
+
+<h3>Order <a href="/orders/create" class="btn btn-primary">Create New</a></h3>
+
+<table id="orders-table" class="data-table table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Client</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Created By</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < orders.length; i++ ) { %>
+            <tr data-href="/orders/<%= orders[i].id %>">
+                <td><%= orders[i].id %></td>
+                <td><%= orders[i].Client.company_name %></td>
+                <td data-order="<%= orders[i].totalPrice %>"><%= orders[i].totalPrice %> UAH</td>
+                <td><%= orders[i].status %></td>
+                <td><%= orders[i].createdAt %></td>
+                <td><%= orders[i].User.username %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>

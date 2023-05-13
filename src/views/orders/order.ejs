@@ -1,0 +1,80 @@
+<% layout('../layouts/main') %>
+
+<h3>Order № <%= order.id %></h3>
+
+<% var statuses = ['created', 'open', 'cancelled', 'fulfilled'] %>
+<% var changable = order.status == 'created' %>
+<div class="mb-3">
+    <h5>
+        <span >Status:</span>
+        <span><b><%= order.status %></b></span>
+        <% if (order.status == 'created') { %>
+            <button data-url="/orders/change-status?orderId=<%= order.id %>" data-status="open" class="btn btn-primary change-status-button"> Open Order</button>
+            <button data-url="/orders/change-status?orderId=<%= order.id %>" data-status="cancelled" class="btn btn-danger change-status-button"> Cancel Order</button>
+        <% } %>
+        <% if (order.status == 'open') { %>
+            <button data-url="/orders/change-status?orderId=<%= order.id %>" data-status="fulfilled" class="btn btn-primary change-status-button"> Fullfill Order</button>
+            <button data-url="/orders/change-status?orderId=<%= order.id %>" data-status="cancelled" class="btn btn-danger change-status-button"> Cancel Order</button>
+        <% } %>
+    </h5>
+</div>
+created by <%= order.User.username %>
+
+
+<p>Client: <a href="/clients/<%= order.Client.id %>"><%= order.Client.company_name %></a></p>
+<% if (order.description) { %>
+    <p>Order Description: <%= order.description %></p>
+<% } %>
+
+<h4>Products:</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Total Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < order.LineItems.length; i++ ) { %>
+            <tr>
+                <% var quantity = order.LineItems[i].quantity ? order.LineItems[i].quantity : 0 %>
+                <td><%= i+1 %></td>
+                <td><%= order.LineItems[i].Product.name %></td>
+                <td><%= quantity  %> tonn</td>
+                <td><%= order.LineItems[i].Product.price %> UAH</td>
+                <td><%= quantity * order.LineItems[i].Product.price %> UAH</td>
+                <% if (changable) { %>
+                    <td><button data-url="/orders/delete-product?lineItemId=<%= order.LineItems[i].id %>" class="btn btn-danger delete-line-item">Delete</button></td>
+                <% } %>
+            </tr>
+        <% } %>
+        <% if (changable) { %>
+            <tr>
+                <th colspan="6">Add product</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="productId" id="order-new-li-product" class="form-control" required>
+                        <option selected disabled>Add new product</option>
+                        <% for( let i = 0; i < products.length; i++ ) { %>
+                            <option value="<%= products[i].id %>" data-price="<%= products[i].price %>"><%= products[i].name %> (<%= products[i].price %> UAH per tonn)</option>
+                        <% } %>
+                    </select>
+                </td>
+                <td>
+                    <input class="form-control" required type="number" name="quantity" id="order-new-li-qty" min="0.1" step="0.1" placeholder="quantity(tonn)">
+                </td>
+                <td id="order-new-li-price"></td>
+                <td id="new-li-total"></td>
+                <td><button id="order-add-product-btn" disabled class="btn btn-dark" data-url="/orders/add-product?orderId=<%= order.id %>">Add</button></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<h3>Order total weight: <%= order.totalWeight %> tonn</h3>
+<h3>Order Total Price: <%= order.totalPrice %> UAH</h3>
