@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
+        "start": "node ./src/bin/server",
         "start-server": "node ./src/bin/server",
         "watch-server": "nodemon ./src/bin/server",
         "start-desktop": "electron ./src/bin/desktop"
