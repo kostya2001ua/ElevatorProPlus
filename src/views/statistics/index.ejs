@@ -25,3 +25,63 @@
         },
     })
 </script>
+
+<h4 class="mt-5">All Products Allocation</h4>
+<div>
+    <canvas style="height: 300px;" id="product-allocations"></canvas>
+</div>
+<script>
+    var productsReport = <%- JSON.stringify(productsReport)  %>;
+    const prodctx = document.getElementById('product-allocations');
+    new Chart(prodctx, {
+        type: 'bar',
+        data: {
+            labels: productsReport.labels,
+            datasets: [{
+                label: 'Allocated tonns',
+                data: productsReport.data,
+            }]
+        },
+    })
+</script>
+
+<div>
+    <canvas style="height: 300px;" id="finance-last-month"></canvas>
+</div>
+
+
+<script>
+    var financeReport = <%- JSON.stringify(financeReport)  %>;
+
+
+    const ctx = document.getElementById('finance-last-month');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: financeReport.labels,
+            datasets: [{
+                label: 'Income per day',
+                data: financeReport.data,
+            }]
+        },
+    })
+</script>
+
+<h4 class="mt-5">Client Spendings</h4>
+<div>
+    <canvas style="height: 300px;" id="client-spendings"></canvas>
+</div>
+<script>
+    var clientsReport = <%- JSON.stringify(clientsReport)  %>;
+    const clientctx = document.getElementById('client-spendings');
+    new Chart(clientctx, {
+        type: 'bar',
+        data: {
+            labels: clientsReport.labels,
+            datasets: [{
+                label: 'UAH spent',
+                data: clientsReport.data,
+            }]
+        },
+    })
+</script>

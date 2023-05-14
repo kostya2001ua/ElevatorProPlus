@@ -3,7 +3,13 @@ var { app, BrowserWindow } = require('electron');
 var window;
 
 function createWindow() {
-    window = new BrowserWindow({ width: 800, height: 600 });
+    window = new BrowserWindow({ 
+        width: 1200, 
+        height: 900,
+        icon: __dirname + '/../public/images/icon.ico'
+    });
+    console.log()
+    window.setMenu(null);
     window.loadURL('http://localhost:3000');
     window.on('closed', function () {
         window = null;
