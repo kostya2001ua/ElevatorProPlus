@@ -7,29 +7,21 @@ var checkAuth = require('../middleware/checkAuth');
 
 /* GET home page. */
 router.get('/', checkAuth, async function (req, res, next) {
-    try {
-         
-        var inventory = await models.Inventory.create({
-            name: 'Main Inventory',
-            description: 'main inventory of elevator',
-            capacity: 10000
-        });
-        var product = await models.Product.create({
-            name: 'Rice',
-            description: 'some rice',
-            price: 100,
-            expirationPeriod: 1000
-        });
+    var inventoryRecords = await models.InventoryRecord.findAll({
+        include: [models.Product, models.Inventory]
+    });
 
-        await models.InventoryRecord.create({
-            allocation: 100,
-            inventoryId: inventory.id,
-            productId: product.id
-        });
-    } catch(e) {
-        console.log(e.message)
-    }
-    res.render('home');
+    inventoryRecords = inventoryRecords.filter(inventoryRecord => {
+        var expiresAt = inventoryRecord.expiresAtDate;
+        var currentDate = new Date();
+        var diffTime = Math.abs(expiresAt - currentDate);
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays < 30 && diffDays > 0;
+    });
+
+    res.render('home', {
+        expiringRecords: inventoryRecords
+    });
 });
 
 module.exports = router;

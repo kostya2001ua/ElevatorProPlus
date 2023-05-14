@@ -1,5 +1,4 @@
 <% layout('../layouts/main') %>
-
 <h3>Inventory Records of product <b><%= product.name %></b></h3>
 <div class="alert alert-success d-none" role="alert" id="js-inv-record-deleted-alert">
     <span>Inventory record successfully deleted</span>
@@ -32,3 +31,4 @@
         <% } %>
     </tbody>
 </table>
+<a class="btn btn-dark mt-5" href="/products/<%= product.id %>">Back to product</a>

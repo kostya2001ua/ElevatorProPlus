@@ -34,12 +34,29 @@ async function createInventory(req, res, next) {
 }
 
 async function showInventoryPage(req, res, next) {
-    var inventory = await Inventory.findByPk(req.params.id);
+    var inventory = await Inventory.findByPk(req.params.id, {
+        include: [{ model: models.InventoryRecord, include: models.Product }]
+    });
+    var occupancyLabels = [];
+    var occupancyData = [];
+    inventory.InventoryRecords.forEach(invetoryRecord => {
+        occupancyLabels.push(invetoryRecord.Product.name);
+        occupancyData.push(invetoryRecord.allocation);
+    });
+    var remainingSpace = inventory.capacity - inventory.totalAllocation;
+    if(remainingSpace > 0) {
+        occupancyLabels.push('Empty');
+        occupancyData.push(remainingSpace);
+    }
     if (!inventory) {
         return next();
     }
     res.render('inventories/edit', {
-        inventory: inventory
+        inventory: inventory,
+        occupancy: {
+            data: occupancyData,
+            labels: occupancyLabels
+        }
     });
 }
 

@@ -1,0 +1,27 @@
+<% layout('../layouts/main') %>
+
+<h3>Statistics</h3>
+
+<h4>Finance Report:</h4>
+
+<div>
+    <canvas style="height: 300px;" id="finance-last-month"></canvas>
+</div>
+
+
+<script>
+    var financeReport = <%- JSON.stringify(financeReport)  %>;
+
+
+    const ctx = document.getElementById('finance-last-month');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: financeReport.labels,
+            datasets: [{
+                label: 'Income per day',
+                data: financeReport.data,
+            }]
+        },
+    })
+</script>

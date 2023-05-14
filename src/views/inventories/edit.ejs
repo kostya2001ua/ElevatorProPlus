@@ -1,22 +1,50 @@
 <% layout('../layouts/main') %>
 
-    <h3>Inventory <%= inventory.name %></h3>
-    <a href="/inventory-records?inventoryId=<%= inventory.id %>">View inventory records</a>
+<h3>Inventory <%= inventory.name %></h3>
+<a href="/inventory-records?inventoryId=<%= inventory.id %>">View inventory records</a>
 
-    <form method="POST" action="/inventories/<%= inventory.id %>" class="g-4 ajax-form">
-        <div class="form-group mb-2">
-            <label>Name</label>
-            <input name="name" type="text" required class="form-control" value="<%= inventory.name %>" placeholder="Enter name of inventory">
-        </div>
-        <div class="form-group mb-2">
-            <label>Description</label>
-            <textarea name="description" class="form-control" cols="30" rows="2" placeholder="Enter description of inventory"><%= inventory.description.trim() %></textarea>
-        </div>
-        <div class="form-group mb-2">
-            <label>Capacity</label>
-            <input type="number" class="form-control" name="capacity" min="0" value="<%= inventory.capacity %>" step="0.1">
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+<form method="POST" action="/inventories/<%= inventory.id %>" class="g-4 ajax-form">
+    <div class="form-group mb-2">
+        <label>Name</label>
+        <input name="name" type="text" required class="form-control" value="<%= inventory.name %>" placeholder="Enter name of inventory">
+    </div>
+    <div class="form-group mb-2">
+        <label>Description</label>
+        <textarea name="description" class="form-control" cols="30" rows="2" placeholder="Enter description of inventory"><%= inventory.description.trim() %></textarea>
+    </div>
+    <div class="form-group mb-2">
+        <label>Capacity</label>
+        <input type="number" class="form-control" name="capacity" min="0" value="<%= inventory.capacity %>" step="0.1">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/inventories/delete/<%= inventory.id %>" class="btn btn-danger">Delete</a>
+</form>
 
-    <a href="/inventories/delete/<%= inventory.id %>" class="btn btn-danger mt-4">Delete</a>
+<a class="btn btn-dark mt-5" href="/inventories">Back to inventories list</a>
+
+<h3 class="mt-5">Occupancy</h3>
+<a href="/inventory-records?inventoryId=<%= inventory.id %>">View inventory records</a>
+
+<div>
+    <canvas style="height: 300px;" id="inventoryOccupancyChart"></canvas>
+</div>
+
+<script>
+    var occupancy = <%- JSON.stringify(occupancy)  %>;
+    const ctx = document.getElementById('inventoryOccupancyChart');
+    new Chart(ctx, {
+        type: 'pie',
+        
+        data: {
+            labels: occupancy.labels,
+            datasets: [{
+                data: occupancy.data,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    })
+
+</script>
