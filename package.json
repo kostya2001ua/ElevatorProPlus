@@ -1,7 +1,8 @@
 {
     "name": "elevatorproplus",
     "version": "0.0.0",
-    "private": true,
+    "private": false,
+    "main": "main.js",
     "scripts": {
         "start": "node ./src/bin/server",
         "start-server": "node ./src/bin/server",
@@ -30,6 +31,7 @@
         "vercel": "^29.3.0"
     },
     "devDependencies": {
+        "electron-packager": "^17.1.1",
         "nodemon": "^2.0.20",
         "sequelize-cli": "^6.6.0"
     }
