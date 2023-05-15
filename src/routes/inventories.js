@@ -7,7 +7,7 @@ router.use(checkAuth);
 
 var inventoryController = require('../controllers/inventoryController');
 
-router.get('/', inventoryController.showInventoriesListPage);
+router.get('/', checkAuth, inventoryController.showInventoriesListPage);
 
 router.get('/create', inventoryController.showCreateInventoryPage);
 
