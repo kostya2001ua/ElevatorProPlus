@@ -3,7 +3,8 @@ var express = require('express');
 var router = express.Router();
 
 var ordersController = require('../controllers/ordersController');
-const { or } = require('sequelize');
+var checkAuth = require('../middleware/checkAuth');
+router.use(checkAuth);
 
 
 router.get('/', ordersController.showOrdersListPage);
