@@ -17,8 +17,8 @@
             <tr data-href="/products/<%= products[i].id %>">
                 <td><%= products[i].id %></td>
                 <td><%= products[i].name %></td>
-                <td><%= products[i].expirationPeriod %> days</td>
-                <td><%= products[i].price %> UAH</td>
+                <td data-order="<%= products[i].expirationPeriod %>"><%= products[i].expirationPeriod %> days</td>
+                <td data-order="<%= products[i].price %>"><%= products[i].price %> UAH</td>
                 <td><%= products[i].createdAt %></td>
             </tr>
         <% } %>
