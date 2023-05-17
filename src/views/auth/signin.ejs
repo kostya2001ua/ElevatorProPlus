@@ -1,5 +1,7 @@
 <% layout('../layouts/auth') %>
 
+    <h3 class="mt-5">Elevator Pro Plus</h3>
+
     <% if (typeof(error) !== 'undefined') { %>
         <div class="alert alert-danger">
             <%= error %>
@@ -14,5 +16,5 @@
             <label>Password</label>
             <input required name="password" type="password" class="form-control" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>

@@ -20,7 +20,7 @@
         <% for( let i = 0; i < inventoryRecords.length; i++ ) { %>
             <tr>
                 <td><a href="/products/<%= inventoryRecords[i].Product.id %>"><%= inventoryRecords[i].Product.name %></a>  </td>
-                <td><%= inventoryRecords[i].allocation %> kg</td>
+                <td><%= inventoryRecords[i].allocation %> tonn</td>
                 <td><%= inventoryRecords[i].expiresAt %></td>
                 <td><%= inventoryRecords[i].createdAt %></td>
                 <td>

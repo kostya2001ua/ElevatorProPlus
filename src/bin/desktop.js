@@ -10,7 +10,7 @@ function createWindow() {
     });
     console.log()
     window.setMenu(null);
-    window.loadURL('http://localhost:3000');
+    window.loadURL('http://localhost:8000');
     window.on('closed', function () {
         window = null;
     });

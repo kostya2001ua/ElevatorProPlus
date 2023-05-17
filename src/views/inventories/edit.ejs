@@ -1,7 +1,6 @@
 <% layout('../layouts/main') %>
 
 <h3>Inventory <%= inventory.name %></h3>
-<a href="/inventory-records?inventoryId=<%= inventory.id %>">View inventory records</a>
 
 <form method="POST" action="/inventories/<%= inventory.id %>" class="g-4 ajax-form">
     <div class="form-group mb-2">
