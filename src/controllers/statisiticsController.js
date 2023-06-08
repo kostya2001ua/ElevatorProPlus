@@ -34,7 +34,8 @@ async function getFinanceReport() {
         include: [{ model: models.LineItem, include: [models.Product] }],
         where: {
             status: 'fulfilled',
-        }
+        },
+        order: ['updatedAt']
     });
     var orderIncomeStat = {};
     orders.forEach(order => {
